@@ -1,12 +1,12 @@
-﻿import { TurtleState } from '../turtle/TurtleState';
+﻿import type { TurtleSettings } from '../turtle/TurtleSettings';
+import { TurtleState } from '../turtle/TurtleState';
 
 export class TurtleInterpreter {
 
     execute(
         commands: string,
         turtle: TurtleState,
-        step = 1,
-        angle = Math.PI / 6,
+        settings: TurtleSettings
     ) {
 
         for (const command of commands) {
@@ -14,31 +14,31 @@ export class TurtleInterpreter {
             switch (command) {
 
                 case 'F':
-                    turtle.step(step);
+                    turtle.step(settings.step);
                     break;
 
                 case '+':
-                    turtle.turnLeft(angle);
+                    turtle.turnLeft(settings.angle);
                     break;
 
                 case '-':
-                    turtle.turnRight(angle);
+                    turtle.turnRight(settings.angle);
                     break;
 
                 case '&':
-                    turtle.pitch(angle);
+                    turtle.pitch(settings.angle);
                     break;
 
                 case '^':
-                    turtle.pitch(-angle);
+                    turtle.pitch(-settings.angle);
                     break;
 
                 case '\\':
-                    turtle.roll(angle);
+                    turtle.roll(settings.angle);
                     break;
 
                 case '/':
-                    turtle.roll(-angle);
+                    turtle.roll(-settings.angle);
                     break;
 
                 case '[':

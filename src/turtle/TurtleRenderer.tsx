@@ -5,24 +5,27 @@ import { Line } from '@react-three/drei';
 
 type Props = {
     turtle: TurtleState;
+    lineWidth: number;
+    showTurtle: boolean;
 };
 
-export function TurtleRenderer({turtle}: Props) {
+export function TurtleRenderer({ turtle, lineWidth, showTurtle }: Props) {
     return (
         <>
             {turtle.segments.map((segment, i) => (
                 <Line
                     key={i}
-                    points={[segment.start, segment.end]}
                     color="white"
-                    lineWidth={2}
+                    points={[segment.start, segment.end]}
+                    lineWidth={lineWidth}
                 />
             ))}
 
-            <mesh position={turtle.position}>
-                <sphereGeometry args={[0.07]} />
-                <meshStandardMaterial color="orange" />
-            </mesh>
+            {showTurtle && (
+                <mesh position={turtle.position}>
+                    <sphereGeometry args={[0.07]} />
+                    <meshStandardMaterial color="orange" />
+                </mesh>)}
 
             <primitive
                 object={
