@@ -1,0 +1,1 @@
+﻿export const simpleTree = "FFFF[+FFFF[+FFFF[+FF[-FF]][-FF[+FF]]][-FFFF[+FF[-FF]][-FF[+FF]]]][-FFFF[+FFFF[+FF[-FF]][-FF[+FF]]][-FFFF[+FF[-FF]][-FF[+FF]]]]FFFF[+FFFF[+FF[-FF]][-FF[+FF]]][-FFFF[+FF[-FF]][-FF[+FF]]]FF";

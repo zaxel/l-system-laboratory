@@ -7,7 +7,7 @@ type Props = {
     turtle: TurtleState;
 };
 
-export function Turtle({turtle}: Props) {
+export function TurtleRenderer({turtle}: Props) {
     return (
         <>
             {turtle.segments.map((segment, i) => (
