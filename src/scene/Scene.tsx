@@ -10,12 +10,36 @@ export function Scene() {
     const turtle = useMemo(() => {
         const t = new TurtleState();
         t.step(2);
-        t.push();
-        t.turn(Math.PI / 4);
-        t.step(1);
-        t.pop();
-        t.turn(-Math.PI / 4);
-        t.step(1);
+
+        t.branch(() => {
+            t.turnLeft(Math.PI / 4);
+            t.step(1);
+
+            t.branch(() => {
+                t.turnLeft(Math.PI / 6);
+                t.step(0.6);
+            });
+
+            t.branch(() => {
+                t.turnRight(Math.PI / 6);
+                t.step(0.6);
+            });
+        });
+
+        t.branch(() => {
+            t.turnRight(Math.PI / 4);
+            t.step(1);
+
+            t.branch(() => {
+                t.turnLeft(Math.PI / 6);
+                t.step(0.6);
+            });
+
+            t.branch(() => {
+                t.turnRight(Math.PI / 6);
+                t.step(0.6);
+            });
+        });
 
         return t;
     }, []);
