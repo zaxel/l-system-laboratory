@@ -8,17 +8,17 @@ import { useMemo } from 'react';
 
 export function Scene() {
     const turtle = useMemo(() => {
-            const t = new TurtleState();
-            t.step(1);
-            t.turn(Math.PI / 6);
-            t.step(1);
-            t.turn(-Math.PI / 4);
-            t.step(1);
-            t.turn(-Math.PI / 4);
-            t.step(2);
-    
-            return t;
-        }, []);
+        const t = new TurtleState();
+        t.step(2);
+        t.push();
+        t.turn(Math.PI / 4);
+        t.step(1);
+        t.pop();
+        t.turn(-Math.PI / 4);
+        t.step(1);
+
+        return t;
+    }, []);
 
 
     return (
@@ -35,7 +35,7 @@ export function Scene() {
 
             <OrbitControls makeDefault />
 
-            <Turtle turtle={turtle}/>
+            <Turtle turtle={turtle} />
         </>
     );
 }
