@@ -14,7 +14,8 @@ export const treeGrammar: Grammar = {
     rules: [
         {
             predecessor: "F",
-            successor: "F[+F]F[-F]F",
+            // successor: "F[+F]F[-F]F",
+            successor: "FF-[-F+F+F]+[+F-F-F]",
         }
     ]
 }

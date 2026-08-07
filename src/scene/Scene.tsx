@@ -23,7 +23,7 @@ export function Scene() {
         iterations: {
             value: 4,
             min: 0,
-            max: 10,
+            max: 8,
             step: 1,
         },
     });
