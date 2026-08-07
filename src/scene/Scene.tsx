@@ -6,7 +6,7 @@ import { useControls } from 'leva';
 import { Lights } from './Lights';
 import { Ground } from './Ground';
 
-import { TurtleRenderer } from '../turtle/TurtleRenderer';
+import { PlantRenderer } from '../turtle/PlantRenderer';
 import { TurtleState } from '../turtle/TurtleState';
 
 import { TurtleInterpreter } from '../interpreter/TurtleInterpreter';
@@ -105,7 +105,7 @@ export function Scene() {
 
             <OrbitControls makeDefault />
 
-            <TurtleRenderer
+            <PlantRenderer
                 turtle={turtleState}
                 lineWidth={rendererControls.lineWidth}
                 showTurtle={rendererControls.showTurtle}

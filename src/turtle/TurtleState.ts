@@ -38,17 +38,17 @@ export class TurtleState {
     parentBranch?: number;
     branches: Branch[] = [];
 
-    private getForward() {
+    getForward() {
         return new THREE.Vector3(0, 1, 0)
             .applyQuaternion(this.rotation);
     }
 
-    private getRight() {
+    getRight() {
         return new THREE.Vector3(1, 0, 0)
             .applyQuaternion(this.rotation);
     }
 
-    private getUp() {
+    getUp() {
         return new THREE.Vector3(0, 0, 1)
             .applyQuaternion(this.rotation);
     }
@@ -62,10 +62,10 @@ export class TurtleState {
     step(distance: number) {
         const forward = this.getForward();
         const start = this.position.clone();
+        this.position.addScaledVector(forward, distance);
         const end = this.position.clone();
         const index = this.branches.length;
 
-        this.position.addScaledVector(forward, distance);
         
         const branch: Branch = {
             index,
