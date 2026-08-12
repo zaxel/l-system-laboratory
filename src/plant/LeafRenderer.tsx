@@ -5,45 +5,39 @@ import {
     getPointOnBranch,
 } from '../turtle/BranchUtils';
 
-import {
-    getLeafPosition,
-    shouldPlaceLeaf,
-} from './LeafPlacement';
-
+import type { LeafPlacement } from './LeafPlacement';
 import type { TurtleState } from '../turtle/TurtleState';
-import { SeededRandom } from '../random/SeededRandom';
 
 type Props = {
     turtle: TurtleState;
-    random: SeededRandom;
+    leafPlacements: LeafPlacement[];
 };
 
-export function LeafRenderer({ turtle, random }: Props) {
-   
+export function LeafRenderer({ turtle, leafPlacements }: Props) {
+
     return (
         <>
-            {turtle.branches
-                .filter(branch => shouldPlaceLeaf(branch, random))
-                .map((branch) => {
-                    const t = getLeafPosition(random);
+            {leafPlacements.map(({ branchIndex, roll, t, tilt }) => {
+                const branch =
+                    turtle.branches[branchIndex];
 
-                    const position = getPointOnBranch(
-                        branch,
-                        t
-                    );
+                const position = getPointOnBranch(
+                    branch,
+                    t
+                );
 
-                    const quaternion =
-                        getBranchQuaternion(branch);
+                const quaternion =
+                    getBranchQuaternion(branch);
 
-                    return (
-                        <Leaf
-                            key={branch.index}
-                            position={position}
-                            quaternion={quaternion}
-                            size={branch.radius * 15}
-                        />
-                    );
-                })}
+                return (
+                    <Leaf
+                        key={branchIndex}
+                        position={position}
+                        quaternion={quaternion}
+                        size={branch.radius * 15}
+                    />
+                );
+            })}
         </>
     );
 }

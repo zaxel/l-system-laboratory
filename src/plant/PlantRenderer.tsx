@@ -4,17 +4,18 @@ import { TurtleState } from '../turtle/TurtleState';
 import { BranchMesh } from './BranchMesh';
 import { LeafRenderer } from './LeafRenderer';
 import type { SeededRandom } from '../random/SeededRandom';
+import type { LeafPlacement } from './LeafPlacement';
 
 type Props = {
     turtle: TurtleState;
     showTurtle: boolean;
-    random: SeededRandom;
+    leafPlacements: LeafPlacement[];
 };
 
 export function PlantRenderer({
     turtle,
     showTurtle,
-    random
+    leafPlacements
 }: Props) {
     return (
         <>
@@ -55,7 +56,7 @@ export function PlantRenderer({
                 );
             })} */}
 
-            <LeafRenderer turtle={turtle} random={random}/>
+            <LeafRenderer turtle={turtle} leafPlacements={leafPlacements}/>
 
             {showTurtle && (
                 <>
