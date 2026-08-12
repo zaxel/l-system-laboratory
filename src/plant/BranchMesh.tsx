@@ -1,6 +1,6 @@
 ﻿import * as THREE from 'three';
 
-import type { Branch } from './TurtleState';
+import type { Branch } from '../turtle/TurtleState';
 
 type Props = {
     branch: Branch;

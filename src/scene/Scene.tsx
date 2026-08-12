@@ -6,7 +6,7 @@ import { useControls } from 'leva';
 import { Lights } from './Lights';
 import { Ground } from './Ground';
 
-import { PlantRenderer } from '../turtle/PlantRenderer';
+import { PlantRenderer } from '../plant/PlantRenderer';
 import { TurtleState } from '../turtle/TurtleState';
 
 import { TurtleInterpreter } from '../interpreter/TurtleInterpreter';

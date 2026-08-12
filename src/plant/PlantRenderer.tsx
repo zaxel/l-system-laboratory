@@ -1,8 +1,9 @@
 ﻿import * as THREE from 'three';
 
-import { TurtleState } from './TurtleState';
+import { TurtleState } from '../turtle/TurtleState';
 import { BranchMesh } from './BranchMesh';
-import { getPointOnBranch, isTerminalBranch } from './BranchUtils';
+import { getPointOnBranch, isTerminalBranch } from '../turtle/BranchUtils';
+import { LeafRenderer } from './LeafRenderer';
 
 type Props = {
     turtle: TurtleState;
@@ -35,7 +36,7 @@ export function PlantRenderer({
                 ))} */}
 
             {/* branches between edges points visualization */}
-            {turtle.branches.map((branch) => {
+            {/* {turtle.branches.map((branch) => {
                 const point = getPointOnBranch(branch, 0.7);
 
                 return (
@@ -50,7 +51,9 @@ export function PlantRenderer({
                         <meshStandardMaterial color="blue" />
                     </mesh>
                 );
-            })}
+            })} */}
+
+            <LeafRenderer turtle={turtle} />
 
             {showTurtle && (
                 <>

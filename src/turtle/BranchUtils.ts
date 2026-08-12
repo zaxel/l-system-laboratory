@@ -16,3 +16,21 @@ export function getPointOnBranch(
         THREE.MathUtils.clamp(t, 0, 1)
     );
 }
+
+export function getDirectionOnBranch(
+    branch: Branch
+) {
+    return branch.direction.clone().normalize();
+}
+
+
+export function getBranchQuaternion(
+    branch: Branch
+) {
+    const direction = branch.direction.clone().normalize();
+
+    return new THREE.Quaternion().setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0),
+        direction
+    );
+}
