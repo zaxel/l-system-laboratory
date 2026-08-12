@@ -31,7 +31,7 @@ export class TurtleState {
     position = new THREE.Vector3();
     rotation = new THREE.Quaternion();
     
-    radius = 0.2;
+    radius = 0.05;
     radiusDecay = 0.75;
     depth = 0;
 

@@ -45,17 +45,8 @@ export function Scene() {
     });
 
     const rendererControls = useControls('Renderer', {
-        lineWidth: {
-            value: 2,
-            min: 1,
-            max: 8,
-            step: 1,
-        },
-
         showTurtle: true,
-
         showGrid: true,
-
         showAxes: true,
     });
 
@@ -107,7 +98,6 @@ export function Scene() {
 
             <PlantRenderer
                 turtle={turtleState}
-                lineWidth={rendererControls.lineWidth}
                 showTurtle={rendererControls.showTurtle}
             />
         </>

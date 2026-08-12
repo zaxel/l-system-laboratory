@@ -1,30 +1,23 @@
 ﻿import * as THREE from 'three';
-import { Line } from '@react-three/drei';
 
 import { TurtleState } from './TurtleState';
+import { BranchMesh } from './BranchMesh';
 
 type Props = {
     turtle: TurtleState;
-    lineWidth: number;
     showTurtle: boolean;
 };
 
 export function PlantRenderer({
     turtle,
-    lineWidth,
     showTurtle,
 }: Props) {
     return (
         <>
             {turtle.branches.map((branch) => (
-                <Line
+                <BranchMesh
                     key={branch.index}
-                    points={[
-                        branch.start,
-                        branch.end,
-                    ]}
-                    color="white"
-                    lineWidth={lineWidth}
+                    branch={branch}
                 />
             ))}
 
