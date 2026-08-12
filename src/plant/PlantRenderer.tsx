@@ -2,17 +2,19 @@
 
 import { TurtleState } from '../turtle/TurtleState';
 import { BranchMesh } from './BranchMesh';
-import { getPointOnBranch, isTerminalBranch } from '../turtle/BranchUtils';
 import { LeafRenderer } from './LeafRenderer';
+import type { SeededRandom } from '../random/SeededRandom';
 
 type Props = {
     turtle: TurtleState;
     showTurtle: boolean;
+    random: SeededRandom;
 };
 
 export function PlantRenderer({
     turtle,
     showTurtle,
+    random
 }: Props) {
     return (
         <>
@@ -53,7 +55,7 @@ export function PlantRenderer({
                 );
             })} */}
 
-            <LeafRenderer turtle={turtle} />
+            <LeafRenderer turtle={turtle} random={random}/>
 
             {showTurtle && (
                 <>

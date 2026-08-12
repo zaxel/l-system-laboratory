@@ -1,9 +1,18 @@
 ﻿import type { Branch } from '../turtle/TurtleState';
+import { SeededRandom } from '../random/SeededRandom';
 
-export function shouldPlaceLeaf(branch: Branch) {
-    return branch.children.length === 0;
+export function shouldPlaceLeaf(
+    branch: Branch,
+    random: SeededRandom
+) {
+    return (
+        branch.children.length === 0 &&
+        random.chance(0.8)
+    );
 }
 
-export function getLeafPositionT() {
-    return 0.7 + Math.random() * 0.3;
+export function getLeafPosition(
+    random: SeededRandom
+) {
+    return random.range(0.7, 1);
 }

@@ -13,6 +13,7 @@ import { TurtleInterpreter } from '../interpreter/TurtleInterpreter';
 
 import { LSystem } from '../grammar/LSystem';
 import { treeGrammar } from '../grammar/Grammar';
+import { SeededRandom } from '../random/SeededRandom';
 
 const interpreter = new TurtleInterpreter();
 const lsystem = new LSystem();
@@ -49,6 +50,20 @@ export function Scene() {
         showGrid: true,
         showAxes: true,
     });
+
+    const randomControls = useControls('Random', {
+        seed: {
+            value: 12345,
+            min: 0,
+            max: 999999,
+            step: 1,
+        },
+    });
+
+    const random = useMemo(
+        () => new SeededRandom(randomControls.seed),
+        [randomControls.seed]
+    );
 
     const turtleState = useMemo(() => {
 
@@ -101,6 +116,7 @@ export function Scene() {
             <PlantRenderer
                 turtle={turtleState}
                 showTurtle={rendererControls.showTurtle}
+                random={random}
             />
         </>
     );

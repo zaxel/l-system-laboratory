@@ -6,23 +6,26 @@ import {
 } from '../turtle/BranchUtils';
 
 import {
-    getLeafPositionT,
+    getLeafPosition,
     shouldPlaceLeaf,
 } from './LeafPlacement';
 
 import type { TurtleState } from '../turtle/TurtleState';
+import { SeededRandom } from '../random/SeededRandom';
 
 type Props = {
     turtle: TurtleState;
+    random: SeededRandom;
 };
 
-export function LeafRenderer({ turtle }: Props) {
+export function LeafRenderer({ turtle, random }: Props) {
+   
     return (
         <>
             {turtle.branches
-                .filter(shouldPlaceLeaf)
+                .filter(branch => shouldPlaceLeaf(branch, random))
                 .map((branch) => {
-                    const t = getLeafPositionT();
+                    const t = getLeafPosition(random);
 
                     const position = getPointOnBranch(
                         branch,
