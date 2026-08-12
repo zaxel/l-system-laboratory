@@ -1,6 +1,6 @@
 ﻿import * as THREE from 'three';
 
-import { TurtleState } from './TurtleState';
+import { isTerminalBranch, TurtleState } from './TurtleState';
 import { BranchMesh } from './BranchMesh';
 
 type Props = {
@@ -20,6 +20,18 @@ export function PlantRenderer({
                     branch={branch}
                 />
             ))}
+
+            {turtle.branches
+                .filter(isTerminalBranch)
+                .map((branch) => (
+                    <mesh
+                        key={`tip-${branch.index}`}
+                        position={branch.end}
+                    >
+                        <sphereGeometry args={[branch.radius * 1.5, 8, 8]} />
+                        <meshStandardMaterial color="orange" />
+                    </mesh>
+                ))}
 
             {showTurtle && (
                 <>

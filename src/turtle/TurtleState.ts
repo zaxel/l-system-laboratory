@@ -16,13 +16,17 @@ export interface Branch {
     end: THREE.Vector3;
 
     direction: THREE.Vector3;
-    
+
     radius: number;
     depth: number;
     length: number;
-    
+
     parentBranch?: number;
     children: number[];
+}
+
+export function isTerminalBranch(branch: Branch) {
+    return branch.children.length === 0;
 }
 
 export class TurtleState {
@@ -30,7 +34,7 @@ export class TurtleState {
 
     position = new THREE.Vector3();
     rotation = new THREE.Quaternion();
-    
+
     radius = 0.05;
     radiusDecay = 0.75;
     depth = 0;
@@ -66,7 +70,7 @@ export class TurtleState {
         const end = this.position.clone();
         const index = this.branches.length;
 
-        
+
         const branch: Branch = {
             index,
             start,
@@ -133,13 +137,13 @@ export class TurtleState {
 
         this.position.copy(state.position);
         this.rotation.copy(state.rotation);
-        
+
         this.radius = state.radius;
         this.depth = state.depth;
 
         this.parentBranch = state.parentBranch;
     }
-    reset(){
+    reset() {
         this.stack.length = 0;
         this.branches.length = 0;
 
