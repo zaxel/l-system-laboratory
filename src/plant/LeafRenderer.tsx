@@ -1,4 +1,5 @@
-﻿import { Leaf } from './Leaf';
+﻿import * as THREE from 'three';
+import { Leaf } from './Leaf';
 
 import {
     getBranchQuaternion,
@@ -28,6 +29,25 @@ export function LeafRenderer({ turtle, leafPlacements }: Props) {
 
                 const quaternion =
                     getBranchQuaternion(branch);
+
+                const rollQuaternion =
+                    new THREE.Quaternion().setFromAxisAngle(
+                        new THREE.Vector3(0, 1, 0),
+                        roll
+                    );
+                const tiltQuaternion =
+                    new THREE.Quaternion().setFromAxisAngle(
+                        new THREE.Vector3(1, 0, 0),
+                        tilt
+                    );
+
+                quaternion.multiply(
+                    rollQuaternion
+                );
+
+                quaternion.multiply(
+                    tiltQuaternion
+                );
 
                 return (
                     <Leaf
