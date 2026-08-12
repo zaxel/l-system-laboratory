@@ -1,6 +1,6 @@
 ﻿import * as THREE from 'three';
 import { useMemo } from 'react';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Stats } from '@react-three/drei';
 import { useControls } from 'leva';
 
 import { Lights } from './Lights';
@@ -80,6 +80,8 @@ export function Scene() {
 
     return (
         <>
+            <Stats />
+            
             <color attach="background" args={['#202025']} />
 
             <Lights />
