@@ -3,6 +3,7 @@ import { Leaf } from './Leaf';
 
 import {
     getBranchQuaternion,
+    getLeafQuaternion,
     getPointOnBranch,
 } from '../turtle/BranchUtils';
 
@@ -11,14 +12,14 @@ import type { TurtleState } from '../turtle/TurtleState';
 
 type Props = {
     turtle: TurtleState;
-    leafPlacements: LeafPlacement[];
+    placements: LeafPlacement[];
 };
 
-export function LeafRenderer({ turtle, leafPlacements }: Props) {
+export function LeafRenderer({ turtle, placements }: Props) {
 
     return (
         <>
-            {leafPlacements.map(({ branchIndex, roll, t, tilt }) => {
+            {placements.map(({ branchIndex, t, angle, droop, spread, twist }) => {
                 const branch =
                     turtle.branches[branchIndex];
 
@@ -28,26 +29,13 @@ export function LeafRenderer({ turtle, leafPlacements }: Props) {
                 );
 
                 const quaternion =
-                    getBranchQuaternion(branch);
-
-                const rollQuaternion =
-                    new THREE.Quaternion().setFromAxisAngle(
-                        new THREE.Vector3(0, 1, 0),
-                        roll
+                    getLeafQuaternion(
+                        branch,
+                        angle,
+                        spread,
+                        twist,
+                        droop
                     );
-                const tiltQuaternion =
-                    new THREE.Quaternion().setFromAxisAngle(
-                        new THREE.Vector3(1, 0, 0),
-                        tilt
-                    );
-
-                quaternion.multiply(
-                    rollQuaternion
-                );
-
-                quaternion.multiply(
-                    tiltQuaternion
-                );
 
                 return (
                     <Leaf

@@ -23,7 +23,7 @@ export function Scene() {
 
     const grammarControls = useControls('Grammar', {
         iterations: {
-            value: 3,
+            value: 2,
             min: 0,
             max: 8,
             step: 1,
@@ -61,11 +61,6 @@ export function Scene() {
         },
     });
 
-    const random = useMemo(
-        () => new SeededRandom(randomControls.seed),
-        [randomControls.seed]
-    );
-
     const turtleState = useMemo(() => {
 
         const turtle = new TurtleState();
@@ -95,12 +90,14 @@ export function Scene() {
     ]);
 
     const leafPlacements = useMemo(
-        () =>
-            generateLeafPlacements(
+        () => {
+            const random = new SeededRandom(randomControls.seed);
+            return generateLeafPlacements(
                 turtleState.branches,
                 random
-            ),
-        [turtleState, random]
+            )
+        },
+        [turtleState]
     );
 
     return (

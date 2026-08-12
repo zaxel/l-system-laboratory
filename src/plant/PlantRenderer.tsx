@@ -56,7 +56,7 @@ export function PlantRenderer({
                 );
             })} */}
 
-            <LeafRenderer turtle={turtle} leafPlacements={leafPlacements}/>
+            <LeafRenderer turtle={turtle} placements={leafPlacements} />
 
             {showTurtle && (
                 <>

@@ -17,7 +17,12 @@ export function Leaf({
             quaternion={quaternion}
             scale={[size, size, size]}
         >
-            <planeGeometry args={[1, 1]} />
+            <planeGeometry
+                args={[1.6, 0.9]}
+                onUpdate={(geometry) => {
+                    geometry.translate(-0.5, 0, 0);
+                }}
+            />
             <meshStandardMaterial
                 color="green"
                 side={THREE.DoubleSide}

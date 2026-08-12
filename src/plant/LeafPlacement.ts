@@ -1,11 +1,15 @@
-﻿import type { Branch } from '../turtle/TurtleState';
-import { SeededRandom } from '../random/SeededRandom';
+﻿import * as THREE from 'three';
+import type { Branch } from '../turtle/TurtleState';
+import { SeededRandom } from '../random/SeededRandom'; 
 
 export interface LeafPlacement {
     branchIndex: number;
     t: number;
-    roll: number;
-    tilt: number;
+
+    angle: number;
+    spread: number;
+    twist: number;
+    droop: number;
 }
 
 export function shouldPlaceLeaf(
@@ -26,8 +30,25 @@ export function getLeafPosition(
 
 export function getLeafRotation(random: SeededRandom) {
     return {
-        roll: random.range(-Math.PI, Math.PI),
-        tilt: random.range(-0.4, 0.4),
+        angle: random.range(
+            THREE.MathUtils.degToRad(35),
+            THREE.MathUtils.degToRad(75)
+        ),
+
+        spread: random.range(
+            -Math.PI,
+            Math.PI
+        ),
+
+        twist: random.range(
+            -0.4,
+            0.4
+        ),
+
+        droop: random.range(
+            -0.25,
+            0.25
+        ),
     };
 }
 
@@ -42,14 +63,22 @@ export function generateLeafPlacements(
             continue;
         }
 
-        const position = getLeafPosition(random);
-        const rotation = getLeafRotation(random);
+        const t = getLeafPosition(random);
+
+        const {
+            angle,
+            spread,
+            twist,
+            droop,
+        } = getLeafRotation(random);
 
         placements.push({
             branchIndex: branch.index,
-            t: position,
-            roll: rotation.roll,
-            tilt: rotation.tilt,
+            t,
+            angle,
+            spread,
+            twist,
+            droop,
         });
     }
 
