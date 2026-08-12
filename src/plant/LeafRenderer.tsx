@@ -3,8 +3,12 @@
 import {
     getBranchQuaternion,
     getPointOnBranch,
-    isTerminalBranch,
 } from '../turtle/BranchUtils';
+
+import {
+    getLeafPositionT,
+    shouldPlaceLeaf,
+} from './LeafPlacement';
 
 import type { TurtleState } from '../turtle/TurtleState';
 
@@ -16,11 +20,13 @@ export function LeafRenderer({ turtle }: Props) {
     return (
         <>
             {turtle.branches
-                .filter(isTerminalBranch)
+                .filter(shouldPlaceLeaf)
                 .map((branch) => {
+                    const t = getLeafPositionT();
+
                     const position = getPointOnBranch(
                         branch,
-                        1
+                        t
                     );
 
                     const quaternion =
