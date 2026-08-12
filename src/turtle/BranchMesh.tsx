@@ -30,7 +30,7 @@ export function BranchMesh({ branch }: Props) {
         >
             <cylinderGeometry
                 args={[
-                    branch.radius,
+                    branch.radius * 0.65,
                     branch.radius,
                     length,
                     8,
