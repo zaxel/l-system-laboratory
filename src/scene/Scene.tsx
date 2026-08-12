@@ -21,7 +21,7 @@ export function Scene() {
 
     const grammarControls = useControls('Grammar', {
         iterations: {
-            value: 4,
+            value: 3,
             min: 0,
             max: 8,
             step: 1,
@@ -81,7 +81,7 @@ export function Scene() {
     return (
         <>
             <Stats />
-            
+
             <color attach="background" args={['#202025']} />
 
             <Lights />

@@ -1,7 +1,8 @@
 ﻿import * as THREE from 'three';
 
-import { isTerminalBranch, TurtleState } from './TurtleState';
+import { TurtleState } from './TurtleState';
 import { BranchMesh } from './BranchMesh';
+import { getPointOnBranch, isTerminalBranch } from './BranchUtils';
 
 type Props = {
     turtle: TurtleState;
@@ -20,8 +21,8 @@ export function PlantRenderer({
                     branch={branch}
                 />
             ))}
-
-            {turtle.branches
+            {/* terminal branches visualization */}
+            {/* {turtle.branches
                 .filter(isTerminalBranch)
                 .map((branch) => (
                     <mesh
@@ -31,7 +32,25 @@ export function PlantRenderer({
                         <sphereGeometry args={[branch.radius * 1.5, 8, 8]} />
                         <meshStandardMaterial color="orange" />
                     </mesh>
-                ))}
+                ))} */}
+
+            {/* branches between edges points visualization */}
+            {turtle.branches.map((branch) => {
+                const point = getPointOnBranch(branch, 0.7);
+
+                return (
+                    <mesh
+                        key={`marker-${branch.index}`}
+                        position={point}
+                    >
+                        <sphereGeometry
+                            args={[branch.radius * 1.2, 8, 8]}
+                        />
+
+                        <meshStandardMaterial color="blue" />
+                    </mesh>
+                );
+            })}
 
             {showTurtle && (
                 <>

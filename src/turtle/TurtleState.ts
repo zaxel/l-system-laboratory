@@ -25,10 +25,6 @@ export interface Branch {
     children: number[];
 }
 
-export function isTerminalBranch(branch: Branch) {
-    return branch.children.length === 0;
-}
-
 export class TurtleState {
     private stack: TurtleSnapshot[] = [];
 
