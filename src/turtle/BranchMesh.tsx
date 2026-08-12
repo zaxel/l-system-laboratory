@@ -23,21 +23,38 @@ export function BranchMesh({ branch }: Props) {
         direction.normalize()
     );
 
-    return (
-        <mesh
-            position={midpoint}
-            quaternion={quaternion}
-        >
-            <cylinderGeometry
-                args={[
-                    branch.radius * 0.65,
-                    branch.radius,
-                    length,
-                    8,
-                ]}
-            />
+    const junctionRadius = branch.radius * 1.15;
 
-            <meshStandardMaterial color="white" />
-        </mesh>
+    return (
+        <>
+            <mesh
+                position={midpoint}
+                quaternion={quaternion}
+            >
+                <cylinderGeometry
+                    args={[
+                        branch.radius * 0.65,
+                        branch.radius,
+                        length,
+                        8,
+                    ]}
+                />
+
+                <meshStandardMaterial color="white" />
+            </mesh>
+            {branch.parentBranch !== undefined && (
+                <mesh position={branch.start}>
+                    <sphereGeometry
+                        args={[
+                            junctionRadius,
+                            8,
+                            8,
+                        ]}
+                    />
+
+                    <meshStandardMaterial color="white" />
+                </mesh>
+            )}
+        </>
     );
 }
