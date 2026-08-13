@@ -8,6 +8,7 @@ export interface ClusterLeaf {
     droop: number;
     length: number;
     width: number;
+    offset: number;
 }
 
 export function generateLeafCluster(
@@ -50,6 +51,11 @@ export function generateLeafCluster(
             width: random.range(
                 0.35,
                 0.65
+            ),
+
+            offset: random.range(
+                0.05,
+                0.2
             ),
         });
     }

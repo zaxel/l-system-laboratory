@@ -42,7 +42,8 @@ export function LeafRenderer({ turtle, placements }: Props) {
                         key={branchIndex}
                         position={position}
                         quaternion={quaternion}
-                        size={branch.radius * 15}
+                        width={1}
+                        length={0.6}
                     />
                 );
             })}

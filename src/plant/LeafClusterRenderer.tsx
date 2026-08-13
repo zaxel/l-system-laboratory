@@ -3,6 +3,7 @@
 import { Leaf } from './Leaf';
 
 import {
+    getBranchFrame,
     getLeafQuaternion,
     getPointOnBranch,
 } from '../turtle/BranchUtils';
@@ -31,9 +32,7 @@ export function LeafClusterRenderer({
         <>
             {placements.map((placement) => {
                 const branch =
-                    turtle.branches[
-                        placement.branchIndex
-                    ];
+                    turtle.branches[placement.branchIndex];
 
                 const position =
                     getPointOnBranch(
@@ -41,10 +40,6 @@ export function LeafClusterRenderer({
                         placement.t
                     );
 
-                /*
-                 * Give every cluster its own
-                 * deterministic random stream.
-                 */
                 const random = new SeededRandom(
                     seed + placement.branchIndex
                 );
@@ -55,30 +50,48 @@ export function LeafClusterRenderer({
                         random
                     );
 
-                return leaves.map(
-                    (leaf, index) => {
-                        const quaternion =
-                            getLeafQuaternion(
-                                branch,
-                                leaf.angle,
-                                leaf.spread,
-                                leaf.twist,
-                                leaf.droop
+                return leaves.map((leaf, index) => {
+                    const quaternion =
+                        getLeafQuaternion(
+                            branch,
+                            leaf.angle,
+                            leaf.spread,
+                            leaf.twist,
+                            leaf.droop
+                        );
+
+                    const frame = getBranchFrame(branch);
+
+                    const offsetDirection =
+                        frame.right.clone()
+                            .multiplyScalar(
+                                Math.cos(leaf.spread)
+                            )
+                            .add(
+                                frame.up.clone()
+                                    .multiplyScalar(
+                                        Math.sin(leaf.spread)
+                                    )
+                            )
+                            .normalize();
+
+                    const leafPosition =
+                        position.clone()
+                            .addScaledVector(
+                                offsetDirection,
+                                leaf.offset
                             );
 
-                        const leafPosition =
-                            position.clone();
-
-                        return (
-                            <Leaf
-                                key={`${placement.branchIndex}-${index}`}
-                                position={leafPosition}
-                                quaternion={quaternion}
-                                size={branch.radius * 15}
-                            />
-                        );
-                    }
-                );
+                    return (
+                        <Leaf
+                            key={`${placement.branchIndex}-${index}`}
+                            position={leafPosition}
+                            quaternion={quaternion}
+                            length={leaf.length}
+                            width={leaf.width}
+                        />
+                    );
+                });
             })}
         </>
     );

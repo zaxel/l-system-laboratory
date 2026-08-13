@@ -146,3 +146,39 @@ export function getLeafQuaternion(
 
     return quaternion;
 }
+
+export function getBranchFrame(
+    branch: Branch
+) {
+    const direction =
+        branch.direction
+            .clone()
+            .normalize();
+
+    const reference =
+        Math.abs(direction.y) < 0.99
+            ? new THREE.Vector3(0, 1, 0)
+            : new THREE.Vector3(1, 0, 0);
+
+    const right =
+        new THREE.Vector3()
+            .crossVectors(
+                direction,
+                reference
+            )
+            .normalize();
+
+    const up =
+        new THREE.Vector3()
+            .crossVectors(
+                right,
+                direction
+            )
+            .normalize();
+
+    return {
+        direction,
+        right,
+        up,
+    };
+}

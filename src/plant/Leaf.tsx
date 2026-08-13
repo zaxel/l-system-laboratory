@@ -3,22 +3,23 @@
 type Props = {
     position: THREE.Vector3;
     quaternion: THREE.Quaternion;
-    size?: number;
+    length: number;
+    width: number;
 };
 
 export function Leaf({
     position,
     quaternion,
-    size = 0.5,
+    length = 1.2,
+    width = 0.7,
 }: Props) {
     return (
         <mesh
             position={position}
             quaternion={quaternion}
-            scale={[size, size, size]}
         >
             <planeGeometry
-                args={[1.6, 0.9]}
+                args={[length, width]}
                 onUpdate={(geometry) => {
                     geometry.translate(-0.5, 0, 0);
                 }}
