@@ -15,6 +15,8 @@ import { LSystem } from '../grammar/LSystem';
 import { treeGrammar } from '../grammar/Grammar';
 import { SeededRandom } from '../random/SeededRandom';
 import { generateLeafPlacements } from '../plant/LeafPlacement';
+import { generateFoliagePlacements } from '../plant/FoliagePlacement';
+import { FoliagePlacementRenderer } from '../plant/FoliagePlacementRenderer';
 
 const interpreter = new TurtleInterpreter();
 const lsystem = new LSystem();
@@ -89,6 +91,20 @@ export function Scene() {
         turtleControls.angle,
     ]);
 
+    const foliagePlacements = useMemo(() => {
+        const foliageRandom = new SeededRandom(
+            randomControls.seed + 1
+        );
+
+        return generateFoliagePlacements(
+            turtleState.branches,
+            foliageRandom
+        );
+    }, [
+        turtleState,
+        randomControls.seed,
+    ]);
+
     const leafPlacements = useMemo(
         () => {
             const random = new SeededRandom(randomControls.seed);
@@ -124,6 +140,11 @@ export function Scene() {
                 turtle={turtleState}
                 showTurtle={rendererControls.showTurtle}
                 leafPlacements={leafPlacements}
+            />
+
+            <FoliagePlacementRenderer
+                turtle={turtleState}
+                placements={foliagePlacements}
             />
         </>
     );
