@@ -17,6 +17,7 @@ import { SeededRandom } from '../random/SeededRandom';
 import { generateLeafPlacements } from '../plant/LeafPlacement';
 import { generateFoliagePlacements } from '../plant/FoliagePlacement';
 import { FoliagePlacementRenderer } from '../plant/FoliagePlacementRenderer';
+import { LeafClusterRenderer } from '../plant/LeafClusterRenderer';
 
 const interpreter = new TurtleInterpreter();
 const lsystem = new LSystem();
@@ -142,9 +143,15 @@ export function Scene() {
                 leafPlacements={leafPlacements}
             />
 
-            <FoliagePlacementRenderer
+            {/* <FoliagePlacementRenderer
                 turtle={turtleState}
                 placements={foliagePlacements}
+            /> */}
+
+            <LeafClusterRenderer
+                turtle={turtleState}
+                placements={foliagePlacements}
+                seed={randomControls.seed}
             />
         </>
     );
