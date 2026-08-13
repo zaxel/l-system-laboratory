@@ -1,5 +1,6 @@
 ﻿import type { FoliagePlacement } from './FoliagePlacement';
 import { SeededRandom } from '../random/SeededRandom';
+import type { FoliageSettings } from '../presets/PlantPreset';
 
 export interface ClusterLeaf {
     angle: number;
@@ -13,11 +14,15 @@ export interface ClusterLeaf {
 
 export function generateLeafCluster(
     placement: FoliagePlacement,
+    settings: FoliageSettings,
     random: SeededRandom
 ): ClusterLeaf[] {
     const count = Math.max(
         1,
-        Math.round(placement.density * 6)
+        Math.round(
+            placement.density *
+            settings.maxLeaves
+        )
     );
 
     const leaves: ClusterLeaf[] = [];
@@ -25,13 +30,9 @@ export function generateLeafCluster(
     for (let i = 0; i < count; i++) {
         leaves.push({
             angle: random.range(
-                Math.PI / 6,
+                Math.PI / 6, 
                 Math.PI / 2
             ),
-
-            spread:
-                (i / count) * Math.PI * 2 +
-                random.range(-0.25, 0.25),
 
             twist: random.range(
                 -Math.PI,
@@ -43,14 +44,19 @@ export function generateLeafCluster(
                 0.4
             ),
 
+            spread:
+                (i / count) *
+                settings.spread +
+                random.range(-0.25, 0.25),
+
             length: random.range(
-                0.7,
-                1.2
+                settings.leafLength.min,
+                settings.leafLength.max
             ),
 
             width: random.range(
-                0.35,
-                0.65
+                settings.leafWidth.min,
+                settings.leafWidth.max
             ),
 
             offset: random.range(

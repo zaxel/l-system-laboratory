@@ -16,17 +16,20 @@ import {
 } from './LeafCluster';
 
 import { SeededRandom } from '../random/SeededRandom';
+import type { FoliageSettings } from '../presets/PlantPreset';
 
 type Props = {
     turtle: TurtleState;
     placements: FoliagePlacement[];
     seed: number;
+    foliage: FoliageSettings
 };
 
 export function LeafClusterRenderer({
     turtle,
     placements,
     seed,
+    foliage
 }: Props) {
     return (
         <>
@@ -47,7 +50,8 @@ export function LeafClusterRenderer({
                 const leaves =
                     generateLeafCluster(
                         placement,
-                        random
+                        foliage,
+                        random,
                     );
 
                 return leaves.map((leaf, index) => {
